@@ -24,10 +24,9 @@ model = linear_model.Perceptron()
 
 
 from sklearn import svm
-
-model = svm.SVR()
 model = svm.SVR(kernel='linear')
 model = svm.SVR(kernel='poly')
+model = svm.SVR(kernel='rbf')
 
 res = predict(model, df_web_ceo_dummies,  feature_cols )
 result = cross_evaluate(model, df_web_ceo_dummies, feature_cols)  
@@ -36,7 +35,7 @@ from sklearn import tree
 model = tree.DecisionTreeRegressor()
 
 from sklearn.ensemble import RandomForestRegressor
-model = RandomForestRegressor(n_estimators=10, max_depth=None,min_samples_split=1, random_state=0)
+model = RandomForestRegressor(n_estimators=100, max_depth=None,min_samples_split=1, random_state=0)
 
 from sklearn.ensemble import ExtraTreesRegressor
 model = ExtraTreesRegressor(n_estimators=10, max_depth=None,min_samples_split=1, random_state=0)
