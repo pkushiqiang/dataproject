@@ -9,6 +9,8 @@ from sklearn import metrics
 from sklearn import cross_validation
 from sklearn.linear_model import LinearRegression
 
+feature_cols = [ u'yearsExperience', u'milesFromMetropolis', u'degree_DOCTORAL', u'degree_HIGH_SCHOOL', u'degree_MASTERS', u'degree_NONE', u'major_BUSINESS', u'major_CHEMISTRY', u'major_COMPSCI', u'major_ENGINEERING', u'major_LITERATURE', u'major_MATH', u'major_NONE', u'major_PHYSICS']
+
 X = df_comp4_dummies[feature_cols]
 Y = df_comp4_dummies.salary
 lm = LinearRegression() 

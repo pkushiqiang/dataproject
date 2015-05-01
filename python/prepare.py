@@ -4,7 +4,7 @@ Created on Wed Apr 29 23:26:46 2015
 
 @author: dlmu__000
 """
-
+%cd C:\eclipse-workspace\dataproject
 import pandas as pd
 from pandas import DataFrame, read_csv
 
@@ -33,6 +33,14 @@ df_comp4.drop(["jobId", "companyId", "jobType","industry" ], axis=1,inplace=True
 degree_dummies = pd.get_dummies(df_comp4.degree, prefix='degree').iloc[:, 1:]
 major_dummies = pd.get_dummies(df_comp4.major, prefix='major').iloc[:, 1:]
 df_comp4_dummies = pd.concat([df_comp4, degree_dummies,major_dummies], axis=1)
+
+%cd C:\eclipse-workspace\dataproject
+import pandas as pd
+df_web_ceo = pd.read_csv('.\\data\\web_ceo.csv')
+degree_dummies = pd.get_dummies(df_web_ceo.degree, prefix='degree').iloc[:, 1:]
+major_dummies = pd.get_dummies(df_web_ceo.major, prefix='major').iloc[:, 1:]
+df_web_ceo_dummies = pd.concat([df_web_ceo, degree_dummies,major_dummies], axis=1)
+del df_web_ceo
 
 
 
