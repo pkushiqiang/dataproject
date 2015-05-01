@@ -41,6 +41,8 @@ degree_dummies = pd.get_dummies(df_web_ceo.degree, prefix='degree').iloc[:, 1:]
 major_dummies = pd.get_dummies(df_web_ceo.major, prefix='major').iloc[:, 1:]
 df_web_ceo_dummies = pd.concat([df_web_ceo, degree_dummies,major_dummies], axis=1)
 del df_web_ceo
+feature_cols = [ u'yearsExperience', u'milesFromMetropolis', u'degree_DOCTORAL', u'degree_HIGH_SCHOOL', u'degree_MASTERS', u'degree_NONE', u'major_BUSINESS', u'major_CHEMISTRY', u'major_COMPSCI', u'major_ENGINEERING', u'major_LITERATURE', u'major_MATH', u'major_NONE', u'major_PHYSICS']
+
 
 
 

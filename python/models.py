@@ -27,4 +27,22 @@ from sklearn import svm
 
 model = svm.SVR()
 model = svm.SVR(kernel='linear')
+model = svm.SVR(kernel='poly')
+
+res = predict(model, df_web_ceo_dummies,  feature_cols )
 result = cross_evaluate(model, df_web_ceo_dummies, feature_cols)  
+
+from sklearn import tree
+model = tree.DecisionTreeRegressor()
+
+from sklearn.ensemble import RandomForestRegressor
+model = RandomForestRegressor(n_estimators=10, max_depth=None,min_samples_split=1, random_state=0)
+
+from sklearn.ensemble import ExtraTreesRegressor
+model = ExtraTreesRegressor(n_estimators=10, max_depth=None,min_samples_split=1, random_state=0)
+
+from  sklearn.ensemble import  AdaBoostRegressor
+model =  AdaBoostRegressor(n_estimators=100)
+
+from sklearn.ensemble import GradientBoostingRegressor
+model = GradientBoostingRegressor(n_estimators=100, learning_rate=0.1,  max_depth=1, random_state=0, loss='ls')

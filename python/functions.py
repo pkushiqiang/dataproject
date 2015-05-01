@@ -15,13 +15,12 @@ from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
 
-def split_evaluate(model, df,   feature_cols ):    
-    
+def predict(model, df,   feature_cols ):
     count =  df.shape[0]
     train_size = count*7/10    
     rows = random.sample(df.index, train_size)    
     df_train = df.ix[rows]
-    df_test = df.drop(rows)    
+    df_test = df.drop(rows)   
     
     trainX = df_train[feature_cols]
     trainY = df_train.salary    
@@ -30,12 +29,14 @@ def split_evaluate(model, df,   feature_cols ):
     
     model.fit(trainX, trainY)
     predictY = model.predict(testX)
-    
+    return [testY, predictY]
+
+def split_evaluate(model, df, feature_cols ):
+    testY, predictY = predict(model, df,   feature_cols )   
     result ={}
     result["mean absolute error"] = mean_absolute_error(testY, predictY)
     result["mean squared error"] = mean_squared_error(testY, predictY)
-    result["r2"] = r2_score(testY, predictY)
-    
+    result["r2"] = r2_score(testY, predictY)    
     return result
 
 def cross_evaluate(model, df, feature_cols ):
@@ -52,6 +53,14 @@ def cross_evaluate(model, df, feature_cols ):
     result["r2"] = np.mean(scores)      
     
     return result
+    
+from sklearn.externals.six import StringIO  
+import pydot 
+def drawTree(model, name):
+  dot_data = StringIO() 
+  model.export_graphviz(model, out_file=dot_data) 
+  graph = pydot.graph_from_dot_data(dot_data.getvalue()) 
+  graph.write_pdf(name+".pdf")     
     
 from sklearn.linear_model import LinearRegression
 # instantiate, fit
