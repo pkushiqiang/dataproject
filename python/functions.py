@@ -7,7 +7,6 @@ Created on Thu Apr 30 19:17:34 2015
 from sklearn import metrics 
 from sklearn import cross_validation
 import numpy as np
-import pandas
 import random
 import numpy
 from sklearn.feature_extraction import DictVectorizer
@@ -54,20 +53,3 @@ def cross_evaluate(model, df, feature_cols ):
     
     return result
     
-from sklearn.externals.six import StringIO  
-import pydot 
-def drawTree(model, name):
-  dot_data = StringIO() 
-  model.export_graphviz(model, out_file=dot_data) 
-  graph = pydot.graph_from_dot_data(dot_data.getvalue()) 
-  graph.write_pdf(name+".pdf")     
-    
-from sklearn.linear_model import LinearRegression
-# instantiate, fit
-lm = LinearRegression()
-feature_cols = [ u'yearsExperience', u'milesFromMetropolis', u'degree_DOCTORAL', u'degree_HIGH_SCHOOL', u'degree_MASTERS', u'degree_NONE', u'major_BUSINESS', u'major_CHEMISTRY', u'major_COMPSCI', u'major_ENGINEERING', u'major_LITERATURE', u'major_MATH', u'major_NONE', u'major_PHYSICS']
-
-result = cross_evaluate(lm, df_web_ceo_dummies, feature_cols)  
-
-
-result = split_evaluate(model, df_web_ceo_dummies, feature_cols)  

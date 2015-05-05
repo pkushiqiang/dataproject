@@ -29,10 +29,7 @@ df_dummies.to_csv('.\\data\\df_dummies.csv', index=False)
 
 df_ceo=df3[df3.jobType == 'CEO']
 df_web_ceo = df3[ (df3.jobType == 'CEO') & (df3.industry== 'WEB') ]
-
-
 df_web_ceo.to_csv('.\\data\\web_ceo.csv', index=False)
-
 
 df_web_ceo = pd.read_csv('.\\data\\web_ceo.csv')
 df_comp4 = df_web_ceo[ df_web_ceo.companyId == 'COMP4' ]
