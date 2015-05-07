@@ -25,3 +25,6 @@ model = linear_model.Lasso(alpha = 0.3328)
 #model = linear_model.LinearRegression()
 model.fit(trainX, trainY)
 predictY = model.predict(testX)
+df_test_dummies["salary"] = predictY
+df_result=df_test_dummies[["jobId","salary"]]
+df_result.to_csv('..\\data\\test_result.csv', index=False)
