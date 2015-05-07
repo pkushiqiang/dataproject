@@ -56,4 +56,16 @@ feature_cols = [ 'yearsExperience', 'milesFromMetropolis', 'degree_DOCTORAL', 'd
 
 
 
+Location1 = r'..\ori\test_features_2013-03-07.csv'
+df = pd.read_csv(Location1)
+
+
+degree_dummies = pd.get_dummies(df.degree, prefix='degree').iloc[:, 1:]
+major_dummies = pd.get_dummies(df.major, prefix='major').iloc[:, 1:]
+jobtype_dummies = pd.get_dummies(df.jobType, prefix='jobType').iloc[:, 1:]
+industry_dummies = pd.get_dummies(df.industry, prefix='industry').iloc[:, 1:]
+
+df_test_dummies = pd.concat([df, degree_dummies,major_dummies,jobtype_dummies,industry_dummies], axis=1)
+df_test_dummies.to_csv('..\\data\\df_test_dummies.csv', index=False)
+
 
