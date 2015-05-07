@@ -9,6 +9,7 @@ from sklearn import cross_validation
 import numpy as np
 import random
 import numpy
+import math
 from sklearn.feature_extraction import DictVectorizer
 from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import mean_squared_error
@@ -34,7 +35,7 @@ def split_evaluate(model, df, feature_cols ):
     testY, predictY = predict(model, df,   feature_cols )   
     result ={}
     result["mean absolute error"] = mean_absolute_error(testY, predictY)
-    result["mean squared error"] = mean_squared_error(testY, predictY)
+    result["root mean squared error"] = math.sqrt(mean_squared_error(testY, predictY))
     result["r2"] = r2_score(testY, predictY)    
     return result
 
