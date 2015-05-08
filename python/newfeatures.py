@@ -68,6 +68,6 @@ model = linear_model.Ridge (alpha = .5)
 #model = linear_model.LinearRegression()
 model.fit(trainX, trainY)
 predictY = model.predict(testX)
-df_test["salary"] = predictY
+df_test["salary"] = np.round(predictY,2)
 df_result=df_test[["jobId","salary"]]
 df_result.to_csv('..\\data\\test_result_new.csv', index=False)         
