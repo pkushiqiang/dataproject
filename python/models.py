@@ -41,3 +41,4 @@ model = ensemble.ExtraTreesRegressor(n_estimators=20, max_depth=None,min_samples
 model = ensemble.AdaBoostRegressor(n_estimators=100)
 
 model = ensemble.GradientBoostingRegressor(n_estimators=100, learning_rate=0.1,  max_depth=1, random_state=0, loss='ls')
+

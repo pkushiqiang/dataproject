@@ -1,0 +1,51 @@
+  OLS Regression Results                            
+==============================================================================
+Dep. Variable:                 salary   R-squared:                       0.744
+Model:                            OLS   Adj. R-squared:                  0.744
+Method:                 Least Squares   F-statistic:                 1.074e+05
+Date:                Thu, 07 May 2015   Prob (F-statistic):               0.00
+Time:                        23:27:56   Log-Likelihood:            -4.3949e+06
+No. Observations:             1000000   AIC:                         8.790e+06
+Df Residuals:                  999972   BIC:                         8.790e+06
+Df Model:                          27                                         
+Covariance Type:            nonrobust                                         
+================================================================================================
+                                   coef    std err          t      P>|t|      [95.0% Conf. Int.]
+------------------------------------------------------------------------------------------------
+Intercept                      134.8684      0.123   1095.097      0.000       134.627   135.110
+C(jobType)[T.CFO]               -9.8030      0.079   -124.772      0.000        -9.957    -9.649
+C(jobType)[T.CTO]               -9.7881      0.078   -124.752      0.000        -9.942    -9.634
+C(jobType)[T.JANITOR]          -62.3584      0.083   -754.943      0.000       -62.520   -62.196
+C(jobType)[T.JUNIOR]           -49.7953      0.079   -634.080      0.000       -49.949   -49.641
+C(jobType)[T.MANAGER]          -29.8671      0.078   -380.723      0.000       -30.021   -29.713
+C(jobType)[T.SENIOR]           -39.7858      0.078   -507.930      0.000       -39.939   -39.632
+C(jobType)[T.VICE_PRESIDENT]   -19.9457      0.078   -254.308      0.000       -20.099   -19.792
+C(degree)[T.DOCTORAL]           10.0302      0.066    151.499      0.000         9.900    10.160
+C(degree)[T.HIGH_SCHOOL]        -5.7184      0.100    -57.346      0.000        -5.914    -5.523
+C(degree)[T.MASTERS]             4.9975      0.066     75.477      0.000         4.868     5.127
+C(degree)[T.NONE]               -9.4029      0.100    -94.284      0.000        -9.598    -9.207
+C(major)[T.BUSINESS]             7.6989      0.115     67.122      0.000         7.474     7.924
+C(major)[T.CHEMISTRY]            1.0804      0.115      9.433      0.000         0.856     1.305
+C(major)[T.COMPSCI]              4.0408      0.115     35.208      0.000         3.816     4.266
+C(major)[T.ENGINEERING]         10.6040      0.115     92.480      0.000        10.379    10.829
+C(major)[T.LITERATURE]          -3.6205      0.115    -31.587      0.000        -3.845    -3.396
+C(major)[T.MATH]                 5.1423      0.115     44.694      0.000         4.917     5.368
+C(major)[T.NONE]                -4.9559      0.115    -43.208      0.000        -5.181    -4.731
+C(major)[T.PHYSICS]              2.3262      0.115     20.271      0.000         2.101     2.551
+C(industry)[T.EDUCATION]        -9.9901      0.073   -136.177      0.000       -10.134    -9.846
+C(industry)[T.FINANCE]          21.1428      0.073    288.228      0.000        20.999    21.287
+C(industry)[T.HEALTH]            6.2473      0.073     85.148      0.000         6.103     6.391
+C(industry)[T.OIL]              21.3097      0.073    290.453      0.000        21.166    21.454
+C(industry)[T.SERVICE]          -4.9804      0.073    -67.867      0.000        -5.124    -4.837
+C(industry)[T.WEB]              12.1105      0.073    165.193      0.000        11.967    12.254
+yearsExperience                  2.0101      0.003    739.371      0.000         2.005     2.015
+milesFromMetropolis             -0.3995      0.001   -588.374      0.000        -0.401    -0.398
+==============================================================================
+Omnibus:                     7199.395   Durbin-Watson:                   2.001
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             7162.858
+Skew:                           0.194   Prob(JB):                         0.00
+Kurtosis:                       2.853   Cond. No.                         767.
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.

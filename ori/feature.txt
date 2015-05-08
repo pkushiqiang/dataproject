@@ -1,0 +1,6 @@
+问一个 feature 相关性问题 
+
+在regression 中
+如果两个 categorical feature 对 target value 影响不是独立的，
+怎么test, 用什么方法test 
+多谢！
