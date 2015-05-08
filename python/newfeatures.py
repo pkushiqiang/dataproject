@@ -14,17 +14,18 @@ Location2 = r'..\ori\train_salaries_2013-03-07.csv'
 df2 = pd.read_csv(Location2)
 df3 = pd.merge(df,df2)
 
-df["industry_major"]=df["industry"]+"_"+df["major"]
 
-degree_dummies = pd.get_dummies(df.degree, prefix='degree').iloc[:, 1:]
-major_dummies = pd.get_dummies(df.major, prefix='major').iloc[:, 1:]
-jobtype_dummies = pd.get_dummies(df.jobType, prefix='jobType').iloc[:, 1:]
-industry_dummies = pd.get_dummies(df.industry, prefix='industry').iloc[:, 1:]
-industry_major_dummies = pd.get_dummies(df.industry_major, prefix='indumajo').iloc[:, 1:]
-
-df_new = pd.concat([df, degree_dummies,major_dummies,jobtype_dummies,industry_dummies,industry_major_dummies], axis=1)
-df_new.to_csv('..\\data\\df_new.csv', index=False)
-
+def createDf(df,csvname):
+    df["industry_major"]=df["industry"]+"_"+df["major"]
+    degree_dummies = pd.get_dummies(df.degree, prefix='degree').iloc[:, 1:]
+    major_dummies = pd.get_dummies(df.major, prefix='major').iloc[:, 1:]
+    jobtype_dummies = pd.get_dummies(df.jobType, prefix='jobType').iloc[:, 1:]
+    industry_dummies = pd.get_dummies(df.industry, prefix='industry').iloc[:, 1:]
+    industry_major_dummies = pd.get_dummies(df.industry_major, prefix='indumajo').iloc[:, 1:]
+    
+    df_new = pd.concat([df, degree_dummies,major_dummies,jobtype_dummies,industry_dummies,industry_major_dummies], axis=1)
+    df_new.to_csv('..\\data\\'+csvname+'.csv', index=False)
+    return df_new
 
 
 feature_cols_all =[  u'yearsExperience', u'milesFromMetropolis', 
@@ -40,7 +41,7 @@ feature_cols_less =[  u'yearsExperience', u'milesFromMetropolis',
                      u'jobType_CFO', u'jobType_CTO', u'jobType_JANITOR', u'jobType_JUNIOR', u'jobType_MANAGER', u'jobType_SENIOR', u'jobType_VICE_PRESIDENT', 
                      u'indumajo_AUTO_BUSINESS', u'indumajo_AUTO_CHEMISTRY', u'indumajo_AUTO_COMPSCI', u'indumajo_AUTO_ENGINEERING', u'indumajo_AUTO_LITERATURE', u'indumajo_AUTO_MATH', u'indumajo_AUTO_NONE', u'indumajo_AUTO_PHYSICS', u'indumajo_EDUCATION_BIOLOGY', u'indumajo_EDUCATION_BUSINESS', u'indumajo_EDUCATION_CHEMISTRY', u'indumajo_EDUCATION_COMPSCI', u'indumajo_EDUCATION_ENGINEERING', u'indumajo_EDUCATION_LITERATURE', u'indumajo_EDUCATION_MATH', u'indumajo_EDUCATION_NONE', u'indumajo_EDUCATION_PHYSICS', u'indumajo_FINANCE_BIOLOGY', u'indumajo_FINANCE_BUSINESS', u'indumajo_FINANCE_CHEMISTRY', u'indumajo_FINANCE_COMPSCI', u'indumajo_FINANCE_ENGINEERING', u'indumajo_FINANCE_LITERATURE', u'indumajo_FINANCE_MATH', u'indumajo_FINANCE_NONE', u'indumajo_FINANCE_PHYSICS', u'indumajo_HEALTH_BIOLOGY', u'indumajo_HEALTH_BUSINESS', u'indumajo_HEALTH_CHEMISTRY', u'indumajo_HEALTH_COMPSCI', u'indumajo_HEALTH_ENGINEERING', u'indumajo_HEALTH_LITERATURE', u'indumajo_HEALTH_MATH', u'indumajo_HEALTH_NONE', u'indumajo_HEALTH_PHYSICS', u'indumajo_OIL_BIOLOGY', u'indumajo_OIL_BUSINESS', u'indumajo_OIL_CHEMISTRY', u'indumajo_OIL_COMPSCI', u'indumajo_OIL_ENGINEERING', u'indumajo_OIL_LITERATURE', u'indumajo_OIL_MATH', u'indumajo_OIL_NONE', u'indumajo_OIL_PHYSICS', u'indumajo_SERVICE_BIOLOGY', u'indumajo_SERVICE_BUSINESS', u'indumajo_SERVICE_CHEMISTRY', u'indumajo_SERVICE_COMPSCI', u'indumajo_SERVICE_ENGINEERING', u'indumajo_SERVICE_LITERATURE', u'indumajo_SERVICE_MATH', u'indumajo_SERVICE_NONE', u'indumajo_SERVICE_PHYSICS', u'indumajo_WEB_BIOLOGY', u'indumajo_WEB_BUSINESS', u'indumajo_WEB_CHEMISTRY', u'indumajo_WEB_COMPSCI', u'indumajo_WEB_ENGINEERING', u'indumajo_WEB_LITERATURE', u'indumajo_WEB_MATH', u'indumajo_WEB_NONE', u'indumajo_WEB_PHYSICS']   
 
-df_new = pd.read_csv('..\\data\\df_new.csv')      
+df_train = pd.read_csv('..\\data\\df_new.csv')      
 from functions import *                
 from sklearn import linear_model
 
@@ -51,4 +52,22 @@ result = split_evaluate(model, df_new, feature_cols_all)
 
 model = linear_model.LinearRegression()
 result = split_evaluate(model, df_new, feature_cols_less)  
-result                     
+result     
+
+Location3 = r'..\ori\test_features_2013-03-07.csv'
+df4 = pd.read_csv(Location3)   
+df_test = createDf(df4,"df_test")    
+
+trainX = df_train[feature_cols_less]
+trainY = df_train.salary  
+testX = df_test[feature_cols_less]
+
+from sklearn import linear_model
+model = linear_model.Ridge (alpha = .5)
+#model = linear_model.Lasso(alpha = 0.3328)
+#model = linear_model.LinearRegression()
+model.fit(trainX, trainY)
+predictY = model.predict(testX)
+df_test["salary"] = predictY
+df_result=df_test[["jobId","salary"]]
+df_result.to_csv('..\\data\\test_result_new.csv', index=False)         

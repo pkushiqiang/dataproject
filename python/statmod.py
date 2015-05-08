@@ -16,9 +16,9 @@ one_lm = ols('salary ~ C(companyId)', data=df3).fit()
 table9 = anova_lm(one_lm)
 print(table9)
 
-kidney_lm = ols('np.log(Days+1) ~ C(Duration) * C(Weight)', data=kt).fit()
+two_lm = ols('salary ~ C(industry)*C(major)', data=df3).fit()
 
-table10 = anova_lm(kidney_lm)
+table10 = anova_lm(two_lm)
 print(table10)
 
 
